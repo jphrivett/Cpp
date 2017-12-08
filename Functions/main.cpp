@@ -2,9 +2,10 @@
 
 using namespace std;
 
-void anotherFunction()
+int anotherFunction()
 {
     cout << "Calls anotherFunction()" << endl;
+    return 5;
 }
 
 int main()
@@ -13,6 +14,7 @@ int main()
     anotherFunction();
     cout << "main() after anotherFunction()" << endl;
 
+    cout << anotherFunction() << endl;
 
     return 0;
 }
