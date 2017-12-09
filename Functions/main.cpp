@@ -4,17 +4,23 @@ using namespace std;
 
 int anotherFunction()
 {
-    cout << "Calls anotherFunction()" << endl;
-    return 5;
+    cout << "Enter a number: ";
+    int x;
+    cin >> x;
+    return x;
 }
 
 int main()
 {
-    cout << "Start main()" << endl;
-    anotherFunction();
-    cout << "main() after anotherFunction()" << endl;
+    int a = anotherFunction();
+    int b = anotherFunction();
 
-    cout << anotherFunction() << endl;
+    cout << "The sum is: " << a + b;
+    //cout << "Start main()" << endl;
+    //anotherFunction();
+    //cout << "main() after anotherFunction()" << endl;
+
+    //cout << anotherFunction() << endl;
 
     return 0;
 }
