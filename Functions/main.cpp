@@ -2,25 +2,15 @@
 
 using namespace std;
 
-int anotherFunction()
+int doubleNumber(int a)
 {
-    cout << "Enter a number: ";
-    int x;
-    cin >> x;
-    return x;
+    return a + a;
 }
 
 int main()
 {
-    int a = anotherFunction();
-    int b = anotherFunction();
-
-    cout << "The sum is: " << a + b;
-    //cout << "Start main()" << endl;
-    //anotherFunction();
-    //cout << "main() after anotherFunction()" << endl;
-
-    //cout << anotherFunction() << endl;
-
+    int x;
+    cin >> x;
+    cout << doubleNumber(x);
     return 0;
 }
