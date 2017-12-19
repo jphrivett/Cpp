@@ -1,4 +1,11 @@
 # depslib dependency file v1.0
-1512750309 source:c:\users\jphr2\documents\github\cpp\functions\main.cpp
+1513365195 source:c:\users\jphr2\documents\github\cpp\functions\main.cpp
+	<iostream>
+
+1513025839 source:c:\users\jphr2\documents\github\cpp\functions\anotherfunction.c
+
+1513025839 source:c:\users\jphr2\documents\github\cpp\functions\add.c
+
+1513365328 source:c:\users\jphr2\documents\github\cpp\functions\add.cpp
 	<iostream>
 
