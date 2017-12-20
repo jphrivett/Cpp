@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 int main()
 {
@@ -25,9 +26,30 @@ int main()
     //std::cout << "y is: " << z << std::endl;
 
 
-    int a{9};
+    int a{15};
     int b{7};
-    std::cout << a/b;
+    double c; // Even though c is a double you lose fraction because a and b are int.
+    c = a/b;
+    std::cout << c;
+
+    float f;
+    f = 9.87654321f; // f suffix means this number should be treated as a float
+    std::cout << f << std::endl;
+    f = 987.654321f;
+    std::cout << f << std::endl;
+    f = 987654.321f;
+    std::cout << f << std::endl;
+    f = 9876543.21f;
+    std::cout << f << std::endl;
+    f = 0.0000987654321f;
+    std::cout << f << std::endl;
+
+    std::cout << std::setprecision(16);
+    std::cout << f << std::endl;
+
+    double d{1.0000};
+    std::cout << std::setprecision(16);
+    std::cout << d << std::endl;
 
     return 0;
 
