@@ -29,7 +29,9 @@ int main()
     int x;
     std::cin >> x;
 
-    if (isPrime(x))
+    bool prime = isPrime(x);
+
+    if (prime)
         std::cout << x << " is a prime number.\n";
     else
         std::cout << x << " is not a prime number.\n";
