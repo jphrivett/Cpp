@@ -51,6 +51,17 @@ int main()
     std::cout << std::setprecision(16);
     std::cout << d << std::endl;
 
+
+    std::cout << true << std::endl;
+
+    std::cout << std::boolalpha;
+
+    std::cout << true << std::endl;
+
+    std::cout << std::noboolalpha;
+
+    std::cout << true << std::endl;
+
     return 0;
 
 }
