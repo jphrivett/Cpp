@@ -36,6 +36,14 @@ int main()
     else
         std::cout << x << " is not a prime number.\n";
 
+    // ASCII characters:
+    char ch{97};
+    std::cout << "Typed 97, prints: " << ch << "\n";
+
+    std::cout << "Now it is an integer so prints: "
+              << static_cast<int>(ch) << "\n";
+
+
     return 0;
 
     /*
