@@ -42,7 +42,15 @@ int main()
 
     std::cout << "Now it is an integer so prints: "
               << static_cast<int>(ch) << "\n";
+    int i1 = static_cast<int>(ch);
+    std::cout << i1;
 
+    const double grav{9.8};
+    //grav = 9;
+    // not possible to reassign constants and they must be
+    // initialised immediately or get compiler error.
+    // But you can initialise constant from an already existing
+    // variable.
 
     return 0;
 
