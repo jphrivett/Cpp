@@ -8,20 +8,26 @@ int getInt()
     return x;
 }
 
-/*bool isEven(int x)
+bool isEven(int x)
 {
-    if ((x % 2) == 0)
+    /*if ((x % 2) == 0)
         return true;
     else
-        return false;
-}*/
+        return false;*/
+
+    // You can also write this like this:
+
+    bool y = ((x % 2) == 0) ? true : false;
+    return y;
+
+}
 
 // A simpler way to write this function is like this:
 
-bool isEven(int x)
+/*bool isEven(int x)
 {
     return (x % 2) == 0;
-}
+}*/
 
 void printResult(bool x)
 {
