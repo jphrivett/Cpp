@@ -23,8 +23,10 @@ int main()
 
     }
     else
+    {
         std::cout << "The smaller value is " << x << "\n";
         std::cout << "The larger value is " << y;
+    }
 
 
     return 0;
