@@ -10,7 +10,8 @@ int main()
     int y;
     std::cin >> y;
 
-    if (y < x)
+    // First method:
+    /*if (y < x)
     {
         std::cout << "Swapping the values\n";
 
@@ -26,8 +27,20 @@ int main()
     {
         std::cout << "The smaller value is " << x << "\n";
         std::cout << "The larger value is " << y;
+    }*/
+
+    // More efficient method:
+    if (y < x)
+    {
+        std::cout << "Swapping the values\n";
+
+        int temp = y;
+        y = x;
+        x = temp;
     }
 
+    std::cout << "The smaller value is " << x << "\n";
+    std::cout << "The larger value is " << y;
 
     return 0;
 }
