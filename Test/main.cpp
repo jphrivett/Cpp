@@ -1,37 +1,81 @@
+/*
+We can generally separate input text errors into four types:
+
+Input extraction succeeds but the input is meaningless to the program (e.g. entering ‘k’ as your mathematical operator).
+Input extraction succeeds but the user enters additional input (e.g. entering ‘*q hello’ as your mathematical operator).
+Input extraction succeeds but the user overflows a numeric value.
+Input extraction fails (e.g. trying to enter ‘q’ into a numeric input).*/
+
 #include <iostream>
-#include <cstdlib> // for rand() and srand()
-#include <ctime> // for time()
 
-int getRandomNumber(int min, int max)
+double getDouble()
 {
-    //For debugging you can set srand() to a known
-    //value so that the generated numbers are the same
-    //each time.
+    while (true) // Loop until user enters a valid input
+    {
+        std::cout << "Enter a double value: ";
+        double x;
+        std::cin >> x;
 
-    //The first output of rand() doesn't change much for
-    //similar seed values, so when calling from clock it
-    //gives very similar values. This effect is made worse
-    //when the numbers are confined to the range 1 to 6.
-    //Best thing to do is to ignore the first value and only
-    //use from second value onwards.
+        // Check for failed extraction
+        if (std::cin.fail()) // has a previous extraction failed?
+        {
+            // yep, so let's handle the failure
+            std::cin.clear(); // put us back in 'normal' operation mode
+            std::cin.ignore(32767,'\n'); // and remove the bad input
+            std::cout << "Oops, that input is invalid.  Please try again.\n";
+        }
+        else
+        {
+            std::cin.ignore(32767,'\n'); // remove any extraneous input
 
-    static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0);  // static used for efficiency, so we only calculate this value once
-    // evenly distribute the random number across our range
-    return min + static_cast<int>((max - min + 1) * (rand() * fraction));
+            // the user can't enter a meaningless double value, so we don't need to worry about validating that
+            return x;
+        }
+    }
+}
+
+char getOperator()
+{
+    while (true) // Loop until user enters a valid input
+    {
+        std::cout << "Enter one of the following: +, -, *, or /: ";
+        char op;
+        std::cin >> op;
+
+        // Chars can accept any single input character, so no need to check for an invalid extraction here
+
+        std::cin.ignore(32767,'\n'); // remove any extraneous input
+
+        // Check whether the user entered meaningful input
+        if (op == '+' || op == '-' || op == '*' || op == '/')
+            return op; // return it to the caller
+        else // otherwise tell the user what went wrong
+            std::cout << "Oops, that input is invalid.  Please try again.\n";
+        } // and try again
+}
+
+void printResult(double x, char op, double y)
+{
+    if (op == '+')
+        std::cout << x << " + " << y << " is " << x + y << '\n';
+    else if (op == '-')
+        std::cout << x << " - " << y << " is " << x - y << '\n';
+    else if (op == '*')
+        std::cout << x << " * " << y << " is " << x * y << '\n';
+    else if (op == '/')
+        std::cout << x << " / " << y << " is " << x / y << '\n';
+    else // Being robust means handling unexpected parameters as well, even though getOperator() guarantees op is valid in this particular program
+        std::cout << "Something went wrong: printResult() got an invalid operator.";
+
 }
 
 int main()
 {
-    srand(static_cast<unsigned int>(time(0))); // set initial seed value to system clock
+    double x = getDouble();
+    char op = getOperator();
+    double y = getDouble();
 
-    for (int count=1; count <= 100; ++count)
-    {
-        std::cout << getRandomNumber(1,6) << "\t";
-
-        // If we've printed 5 numbers, start a new row
-        if (count % 5 == 0)
-            std::cout << "\n";
-	}
+    printResult(x, op, y);
 
     return 0;
 }
