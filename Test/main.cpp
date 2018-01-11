@@ -1,31 +1,19 @@
 #include <iostream>
-
-int breakOrReturn()
-{
-    while (true) // infinite loop
-    {
-        std::cout << "Enter 'b' to break or 'r' to return: ";
-        char ch;
-        std::cin >> ch;
-
-        if (ch == 'b')
-            break; // execution will continue at the first statement beyond the loop
-
-        if (ch == 'r')
-            return 1; // return will cause the function to immediately return to the caller (in this case, main())
-    }
-
-    // breaking the loop causes execution to resume here
-
-    std::cout << "We broke out of the loop\n";
-
-    return 0;
-}
+#include <cstdlib> // for rand() and srand()
+#include <ctime> // for time()
 
 int main()
 {
-    int returnValue = breakOrReturn();
-    std::cout << "Function breakOrContinue returned " << returnValue << '\n';
+    srand(static_cast<unsigned int>(time(0))); // set initial seed value to system clock
+
+    for (int count=1; count <= 100; ++count)
+    {
+        std::cout << rand() << "\t";
+
+        // If we've printed 5 numbers, start a new row
+        if (count % 5 == 0)
+            std::cout << "\n";
+	}
 
     return 0;
 }

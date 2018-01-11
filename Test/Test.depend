@@ -1,4 +1,6 @@
 # depslib dependency file v1.0
-1515617006 source:c:\users\jphr2\documents\github\cpp\test\main.cpp
+1515666679 source:c:\users\jphr2\documents\github\cpp\test\main.cpp
 	<iostream>
+	<cstdlib>
+	<ctime>
 
