@@ -4,6 +4,10 @@
 
 int getRandomNumber(int min, int max)
 {
+    //For debugging you can set srand() to a known
+    //value so that the generated numbers are the same
+    //each time.
+
     //The first output of rand() doesn't change much for
     //similar seed values, so when calling from clock it
     //gives very similar values. This effect is made worse
