@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1515692286 source:c:\users\jphr2\documents\github\cpp\chap5quizloopsq2\main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+
