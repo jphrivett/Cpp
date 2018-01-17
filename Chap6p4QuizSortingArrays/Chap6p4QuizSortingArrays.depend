@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1516191368 source:c:\users\jphr2\documents\github\cpp\chap6p4quizsortingarrays\main.cpp
+	<algorithm>
+	<iostream>
+	<utility>
+	<iostream>
+

@@ -1,3 +1,4 @@
+/*// Q2:
 #include <algorithm> // for std::swap, use <utility> instead if C++11
 #include <iostream>
 
@@ -30,4 +31,59 @@ int main()
         std::cout << array[index] << ' ';
 
     return 0;
+}*/
+
+//Q3:
+#include <utility>
+#include <iostream>
+
+int main()
+{
+    int array[] = { 6, 3, 2, 9, 7, 1, 5, 4, 8 };
+    const int length = sizeof(array) / sizeof(array[0]);
+
+    int element = 0;
+    int iteration = 0;
+    bool swap = 0;
+
+    for (; iteration < length - 1; ++iteration)
+    {
+        for(; element < length - iteration - 1; ++element)
+        {
+            if (array[element] > array[element + 1])
+            {
+                std::swap(array[element],array[element + 1]);
+                swap = 1;
+            }
+
+        }
+
+        if (swap == 0)
+        {
+            std::cout << "The array was sorted on iteration " << iteration + 1 << "\n";
+            break;
+        }
+
+        element = 0;
+        swap = 0;
+    }
+
+    for (int counter = 0; counter < length; ++counter)
+        std::cout << array[counter] << " ";
+
+    return 0;
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
