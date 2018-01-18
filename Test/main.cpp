@@ -1,17 +1,23 @@
 #include <iostream>
 
+// parameter ptr contains a copy of the array's address
+void changeArray(int *ptr)
+{
+    *ptr = 5; // so changing an array element changes the _actual_ array
+    std::cout << sizeof(ptr) << "\n";
+    std::cout << sizeof(*ptr) << "\n";
+}
 
 int main()
 {
-    char *chPtr; // chars are 1 byte
-    int *iPtr; // ints are usually 4 bytes
-    struct Something
-    {
-        int nX, nY, nZ;
-    };
-    Something *somethingPtr; // Something is probably 12 bytes
+    int array[] = { 1, 1, 2, 3, 5, 8, 13, 21 };
+    std::cout << "Element 0 has value: " << array[0] << '\n';
+    std::cout << sizeof(array) << "\n";
 
-    std::cout << sizeof(chPtr) << '\n'; // prints 4
-    std::cout << sizeof(iPtr) << '\n'; // prints 4
-    std::cout << sizeof(somethingPtr) << '\n'; // prints 4
+    changeArray(array);
+
+    std::cout << "Element 0 has value: " << array[0] << '\n';
+    std::cout << sizeof(array) << "\n";
+
+     return 0;
 }
