@@ -43,7 +43,7 @@
 
 int main()
 {
-    const std::string names[] = {"Alex","Betty","Caroline","Dave","Emily","Fred","Greg","Holly"};
+    const std::string names[] = {"Alexis","Betty","Caroline","Dave","Emily","Fred","Greg","Holly"};
     std::cout << "Enter a name: ";
     std::string name;
     std::cin >> name;
