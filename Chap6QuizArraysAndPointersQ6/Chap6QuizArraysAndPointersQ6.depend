@@ -1,5 +1,7 @@
 # depslib dependency file v1.0
-1516614454 source:c:\users\jphr2\documents\github\cpp\chap6quizarraysandpointersq6\main.cpp
+1516622808 source:c:\users\jphr2\documents\github\cpp\chap6quizarraysandpointersq6\main.cpp
 	<iostream>
 	<array>
+	<cstdlib>
+	<ctime>
 

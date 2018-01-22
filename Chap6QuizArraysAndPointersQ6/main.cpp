@@ -1,5 +1,7 @@
 #include <iostream>
 #include <array>
+#include <cstdlib>
+#include <ctime>
 
 enum class CardRank
 {
@@ -78,10 +80,58 @@ void printDeck(const std::array<Card,52> &deck)
 
     }
 
+    std::cout << "\n\n";
+}
+
+void swapCard(Card &card1, Card &card2)
+{
+    Card temp = card1;
+
+    card1 = card2;
+    card2 = temp;
+    }
+
+void shuffleDeck(std::array<Card,52> &deck)
+{
+
+    for (int i = 0; i < 52; ++i)
+    {
+        static const double frac = 1.0/(static_cast<double>(RAND_MAX) + 1.0);
+        //Get random number between 0 and 51:
+        int irand = 0 + static_cast<int>(52*rand()*frac);
+
+        swapCard(deck.at(i),deck.at(irand));
+    }
+
+}
+
+int getCardValue(const Card &card)
+{
+    int value {0};
+
+    switch (card.rank)
+    {
+        case CardRank::TWO:       return 2;
+        case CardRank::THREE:       return 3;
+        case CardRank::FOUR:       return 4;
+        case CardRank::FIVE:       return 5;
+        case CardRank::SIX:       return 6;
+        case CardRank::SEVEN:       return 7;
+        case CardRank::EIGHT:       return 8;
+        case CardRank::NINE:       return 9;
+        case CardRank::TEN:       return 10;
+        case CardRank::JACK:       return 10;
+        case CardRank::QUEEN:       return 10;
+        case CardRank::KING:       return 10;
+        case CardRank::ACE:       return 11;
+    }
 }
 
 int main()
 {
+    srand(static_cast<unsigned int>(time(0)));
+    rand(); // To remove junk first value
+
     std::array<Card,52> deck;
 
     int card {0};
@@ -96,6 +146,12 @@ int main()
     }
 
     printDeck(deck);
+
+    shuffleDeck(deck);
+
+    printDeck(deck);
+
+    std::cout << getCardValue(deck.at(9));
 
     return 0;
 }
