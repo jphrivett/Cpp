@@ -2,6 +2,12 @@
 #include <array>
 #include <cstdlib>
 #include <ctime>
+enum class Outcome
+{
+    WIN,
+    LOSE,
+    TIE
+};
 
 enum class CardRank
 {
@@ -107,8 +113,6 @@ void shuffleDeck(std::array<Card,52> &deck)
 
 int getCardValue(const Card &card)
 {
-    int value {0};
-
     switch (card.rank)
     {
         case CardRank::TWO:       return 2;
@@ -125,6 +129,118 @@ int getCardValue(const Card &card)
         case CardRank::KING:       return 10;
         case CardRank::ACE:       return 11;
     }
+
+    return 0;
+}
+
+//Not a good idea to have these functions changing the score and card.
+//As shown on the website:
+//http://www.learncpp.com/cpp-tutorial/6-x-chapter-6-comprehensive-quiz/comment-page-5/#comment-315505
+//it is better to have these as constants and increase the pointer value/card
+//number in the function call itself and then use the output of the function to
+//add to the score. As in:
+//playerTotal += getCardValue(*cardPtr++);
+//After the pointer parameter has been passed into the function, it increments
+//the card number.
+void playerDraw(int &playerScore, Card *cards, int &card, int &playerAces)
+{
+    std::cout << "The player draws ";
+    printCard(cards[card]);
+    std::cout << '\n';
+    playerScore += getCardValue(cards[card]);
+    std::cout << "The player's score is " << playerScore << '\n';
+    if (cards[card].rank == CardRank::ACE)
+        ++playerAces;
+    ++card;
+}
+
+void dealerDraw(int &dealerScore, Card *cards, int &card, int &dealerAces)
+{
+    std::cout << "The dealer draws ";
+    printCard(cards[card]);
+    std::cout << '\n';
+    dealerScore += getCardValue(cards[card]);
+    std::cout << "The dealers's score is " << dealerScore << '\n';
+    if (cards[card].rank == CardRank::ACE)
+        ++dealerAces;
+    ++card;
+}
+
+Outcome playBlackjack(std::array<Card,52> &deck)
+{
+    int card = 0;
+    Card *cards = &deck[card];
+    int playerScore = 0;
+    int dealerScore = 0;
+    int playerAces = 0;
+    int dealerAces = 0;
+
+
+    dealerDraw(dealerScore, cards, card, dealerAces);
+    playerDraw(playerScore, cards, card, playerAces);
+    playerDraw(playerScore, cards, card, playerAces);
+
+    std::cout << "Draw again? (y/n) \n";
+    char drawAgain = 0;
+    std::cin >> drawAgain;
+
+    while (drawAgain == 'y')
+    {
+        playerDraw(playerScore, cards, card, playerAces);
+        while (playerScore > 21)
+        {
+            if (playerAces-- > 0)
+            {
+                playerScore -= 10;
+                std::cout << "Taking ace = 1, the player's score is "
+                          << playerScore << '\n';
+            }
+            else
+            {
+                return Outcome::LOSE;
+            }
+
+        }
+        std::cout << "Draw again? (y/n) \n";
+        std::cin >> drawAgain;
+    }
+
+    while (dealerScore < 17)
+    {
+        dealerDraw(dealerScore, cards, card, dealerAces);
+        while (dealerScore > 21)
+        {
+            if (dealerAces-- > 0)
+            {
+                dealerScore -= 10;
+                std::cout << "Taking ace = 1, the dealers's score is "
+                          << dealerScore << '\n';
+            }
+            else
+            {
+                return Outcome::WIN;
+            }
+
+        }
+
+    }
+
+    //if (playerScore > dealerScore)
+    //    return 1;
+    //else
+    //    return 0;
+
+    //Can write this more efficiently simply as:
+    //return (playerScore > dealerScore);
+
+    //Including ties:
+    if (playerScore > dealerScore)
+        return Outcome::WIN;
+    else if (playerScore < dealerScore)
+        return Outcome::LOSE;
+    else
+        return Outcome::TIE;
+
 }
 
 int main()
@@ -132,8 +248,8 @@ int main()
     srand(static_cast<unsigned int>(time(0)));
     rand(); // To remove junk first value
 
+    //Instantiate and assign the cards in the deck:
     std::array<Card,52> deck;
-
     int card {0};
     for (int irank = 0; irank < static_cast<int>(CardRank::MAX_RANK); ++irank)
     {
@@ -145,13 +261,19 @@ int main()
         }
     }
 
-    printDeck(deck);
-
     shuffleDeck(deck);
+    Outcome outcome = playBlackjack(deck);
+    if (outcome == Outcome::WIN)
+        std::cout << "You win!";
+    else if (outcome == Outcome::LOSE)
+        std::cout << "You lose!";
+    else if (outcome == Outcome::TIE)
+        std::cout << "You tie!";
 
-    printDeck(deck);
-
-    std::cout << getCardValue(deck.at(9));
+    //if (playBlackjack(deck))
+    //    std::cout << "You win!";
+    //else
+    //    std::cout << "You lose!";
 
     return 0;
 }
