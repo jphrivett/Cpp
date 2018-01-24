@@ -1,5 +1,7 @@
 #include <iostream>
 
+typedef int (*arithmeticFcn)(int, int);
+
 int getInt()
 {
     while (true)
