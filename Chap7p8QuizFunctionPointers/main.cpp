@@ -58,6 +58,12 @@ int divide(int x, int y)
     return (x / y);
 }
 
+struct arithmeticStruct
+{
+    char op;
+    arithmeticFcn ptr;
+};
+
 //Put the typedef just before where you need to use it,
 //just like whenever you instantiate anything normally:
 typedef int (*arithmeticFcn)(int, int);
