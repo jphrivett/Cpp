@@ -60,9 +60,20 @@ int divide(int x, int y)
     return (x / y);
 }
 
+arithmeticFcn getArithmeticFunction(char op)
+{
+    switch (op)
+    {
+    default:
+    case '+': return add;
+    case '-': return subtract;
+    case '*': return multiply;
+    case '/': return divide;
+    }
+}
+
 int main()
 {
-
     int x = getInt();
     char op = getChar();
     int y = getInt();
