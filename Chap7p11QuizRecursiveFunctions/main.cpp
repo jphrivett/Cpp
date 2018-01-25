@@ -28,6 +28,7 @@ int main()
     return 0;
 }*/
 
+/*//Q1:
 int factorial(int n)
 {
     if (n == 0)
@@ -43,4 +44,30 @@ int main()
         std::cout << factorial(i) << ' ';
 
     return 0;
+}*/
+
+//Q2:
+int sumInts(int x)
+{
+    if (x < 10)
+        return x;
+    else
+        return sumInts(x / 10) + (x % 10);
 }
+
+int main()
+{
+    std::cout << sumInts(93427) << '\n';
+    std::cout << (0 % 10);
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
