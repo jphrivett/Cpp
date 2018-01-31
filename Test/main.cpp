@@ -3,27 +3,30 @@
 #include <sstream> // for std::stringstream
 #include <cstdlib> // for exit()
 
-int main(int argc, char *argv[])
+class Something
 {
-	if (argc <= 1)
-	{
-		// On some operating systems, argv[0] can end up as an empty string instead of the program's name.
-		// We'll conditionalize our response on whether argv[0] is empty or not.
-		if (argv[0])
-			std::cout << "Usage: " << argv[0] << " <number>" << '\n';
-		else
-			std::cout << "Usage: <program name> <number>" << '\n';
+private:
+    int m_value1;
+    double m_value2;
+    char m_value3;
 
-		exit(1);
-	}
+public:
+    Something(int value1, double value2, char value3 = 'c')
+        : m_value1(value1), m_value2(value2), m_value3(value3) // directly initialize our member variables
+    {
+    // No need for assignment here
+    }
 
-	std::stringstream convert(argv[1]); // set up a stringstream variable named convert, initialized with the input from argv[1]
+    void print()
+    {
+         std::cout << "Something(" << m_value1 << ", " << m_value2 << ", " << m_value3 << ")\n";
+    }
 
-	int myint;
-	if (!(convert >> myint)) // do the conversion
-		myint = 0; // if conversion fails, set myint to a default value
+};
 
-	std::cout << "Got integer: " << myint << '\n';
-
-	return 0;
+int main()
+{
+    Something something(1, 2.2); // value1 = 1, value2=2.2, value3 gets default value 'c'
+    something.print();
+    return 0;
 }
