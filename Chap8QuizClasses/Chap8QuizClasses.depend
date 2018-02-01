@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1517504021 source:c:\users\jphr2\documents\github\cpp\chap8quizclasses\main.cpp
+	<iostream>
+	<cmath>
+	<iostream>
+	<string>
+	<ctime>
+	<cstdlib>
+
