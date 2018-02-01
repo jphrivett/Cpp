@@ -1,3 +1,4 @@
+/*//Q1:
 #include <iostream>
 #include <cmath>
 
@@ -37,4 +38,16 @@ int main()
     std::cout << "Distance between two points: " << distanceFrom(first, second) << '\n';
 
     return 0;
-}
+}*/
+
+/*
+//Destructor:
+{
+    delete[] m_data;
+
+    //Don't need this because program ends here anyway, so pointer is destroyed:
+    //m_data = nullptr;
+}*/
+
+
+
