@@ -12,25 +12,29 @@ public:
     {
     }
 
-    print()
+    void print()
     {
         std::cout << "Point2d (" << m_x << ", " << m_y << ");\n";
     }
 
-    double distanceTo(Point2d p)
-    {
-        return sqrt((m_x - p.m_x)*(m_x - p.m_x) + (m_y - p.m_y)*(m_y - p.m_y));
-    }
+    friend double distanceFrom(const Point2d &p1, const Point2d &p2);
 
 };
 
+//You should not pass in classes by value, but by constant reference:
+double distanceFrom(const Point2d &p1, const Point2d &p2)
+{
+    return sqrt((p1.m_x - p2.m_x)*(p1.m_x - p2.m_x) + (p1.m_y - p2.m_y)*(p1.m_y - p2.m_y));
+}
+
 int main()
 {
+
     Point2d first;
     Point2d second(3.0, 4.0);
     first.print();
     second.print();
-    std::cout << "Distance between two points: " << first.distanceTo(second) << '\n';
+    std::cout << "Distance between two points: " << distanceFrom(first, second) << '\n';
 
     return 0;
 }
