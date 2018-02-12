@@ -1,7 +1,15 @@
 # depslib dependency file v1.0
-1516979434 source:c:\users\jphr2\documents\github\cpp\test\main.cpp
+1518451011 source:c:\users\jphr2\documents\github\cpp\test\main.cpp
 	<iostream>
-	<string>
-	<sstream>
-	<cstdlib>
+	"testHeader1.h"
+
+1518451052 c:\users\jphr2\documents\github\cpp\test\testheader1.h
+
+1518451349 source:c:\users\jphr2\documents\github\cpp\test\testheader2.cpp
+
+1518450069 c:\users\jphr2\documents\github\cpp\test\testheader2.h
+
+1518450955 source:c:\users\jphr2\documents\github\cpp\test\minimum.cpp
+
+1518451152 source:c:\users\jphr2\documents\github\cpp\test\testheader1.cpp
 
