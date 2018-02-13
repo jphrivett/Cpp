@@ -1,4 +1,16 @@
 # depslib dependency file v1.0
-1518517577 source:c:\users\jphr2\documents\github\cpp\chap8p13friendfunctionsandclasses\main.cpp
+1518519167 source:c:\users\jphr2\documents\github\cpp\chap8p13friendfunctionsandclasses\main.cpp
 	<iostream>
+	"Vector3d.h"
+
+1518518702 c:\users\jphr2\documents\github\cpp\chap8p13friendfunctionsandclasses\point3d.h
+	<iostream>
+
+1518519059 c:\users\jphr2\documents\github\cpp\chap8p13friendfunctionsandclasses\vector3d.h
+	<iostream>
+	"Point3d.h"
+
+1518518365 source:c:\users\jphr2\documents\github\cpp\chap8p13friendfunctionsandclasses\point3d.cpp
+
+1518518670 source:c:\users\jphr2\documents\github\cpp\chap8p13friendfunctionsandclasses\vector3d.cpp
 
