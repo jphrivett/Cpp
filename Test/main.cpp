@@ -1,23 +1,13 @@
-#include <iostream>
+#include "testHeader1.h"
+#include "testHeader2.h"
 
-class idGenerator
-{
-    static int nextID;
-
-public:
-    static int getNextID();
-};
-
-int idGenerator::nextID = 1;
-
-int idGenerator::getNextID()
-{
-    return nextID++;
-}
 
 int main()
 {
-    for (int i = 0; i < 6; ++i)
-        std::cout << idGenerator::getNextID();
-}
+    Storage storage(5, 6.7);
+    Display display(false);
 
+    display.displayItem(storage);
+
+    return 0;
+}
