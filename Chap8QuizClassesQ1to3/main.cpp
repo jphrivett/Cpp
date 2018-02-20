@@ -40,7 +40,7 @@ int main()
     return 0;
 }*/
 
-/*
+/*//Q2:
 //Destructor:
 {
     delete[] m_data;
@@ -49,6 +49,7 @@ int main()
     //m_data = nullptr;
 }*/
 
+//Q3:
 #include <iostream>
 #include <string>
 #include <ctime>
