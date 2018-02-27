@@ -1,7 +1,11 @@
 # depslib dependency file v1.0
-1519142432 source:c:\users\jphr2\documents\github\cpp\chap8quizclassesq3and4\main.cpp
-	<iostream>
+1519741072 source:c:\users\jphr2\documents\github\cpp\chap8quizclassesq3and4\main.cpp
 	<string>
 	<ctime>
 	<cstdlib>
+	<iostream>
+	<array>
+	<ctime>
+	<cstdlib>
+	<cassert>
 
