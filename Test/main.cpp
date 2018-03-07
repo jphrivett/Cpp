@@ -1,46 +1,46 @@
 #include <iostream>
 
-class Cents
+class Point
 {
 private:
-    int m_cents;
+    int m_x;
+    int m_y;
+    int m_z;
 
 public:
-    Cents(int cents = 0) : m_cents {cents}
+    Point(int x = 0, int y = 0, int z = 0):m_x{x},m_y{y},m_z{z}
     {
-        //std::cout << "I have " << m_cents << " cents\n";
+
     }
 
-    friend Cents operator+(const Cents &c1, const Cents &c2);
-    friend Cents operator-(const Cents &c1, const Cents &c2);
-
-    int getCents() const
-    {
-       return m_cents;
-    }
+    friend std::istream& operator>> (std::istream &in, Point &p);
+    friend std::ostream& operator<< (std::ostream &out, const Point &p);
 
 };
 
-Cents operator+(const Cents &c1, const Cents &c2)
+std::istream& operator>> (std::istream &in, Point &p)
 {
-    return Cents(c1.m_cents + c2.m_cents);
+    in >> p.m_x;
+    in >> p.m_y;
+    in >> p.m_z;
+
+    return in;
 }
 
-Cents operator-(const Cents &c1, const Cents &c2)
+std::ostream& operator<< (std::ostream &out, const Point &p)
 {
-    return Cents{c1.m_cents - c2.m_cents};
+    out << "(" << p.m_x << ", " << p.m_y << ", " << p.m_z << ")";
+    return out;
 }
 
 int main()
 {
+    std::cout << "Enter a point: \n";
 
-    Cents c1{3};
-    Cents c2{6};
+    Point point;
+    std::cin >> point;
 
-    Cents sum = c1-c2;
-
-    std::cout << "I have " << sum.getCents() << " cents.";
+    std::cout << "You entered: " << point << '\n';
 
     return 0;
-
 }
