@@ -1,39 +1,46 @@
 #include <iostream>
-#include <cmath>
 
-
-class Point2d
+class Cents
 {
-    double m_x;
-    double m_y;
+private:
+    int m_cents;
 
 public:
-    Point2d(double x = 0.0, double y = 0.0):m_x {x}, m_y{y}
+    Cents(int cents = 0) : m_cents {cents}
     {
-
+        //std::cout << "I have " << m_cents << " cents\n";
     }
 
-    void print() const
-    {
-        std::cout << m_x << " " << m_y << '\n';
-    }
+    friend Cents operator+(const Cents &c1, const Cents &c2);
+    friend Cents operator-(const Cents &c1, const Cents &c2);
 
-    friend double distanceFrom(const Point2d &p1, const Point2d &p2);
+    int getCents() const
+    {
+       return m_cents;
+    }
 
 };
 
-    double distanceFrom(const Point2d &p1, const Point2d &p2)
-    {
-         return sqrt((p1.m_x-p2.m_x)*(p1.m_x-p2.m_x) + (p1.m_y-p2.m_y)*(p1.m_y-p2.m_y));
-    }
+Cents operator+(const Cents &c1, const Cents &c2)
+{
+    return Cents(c1.m_cents + c2.m_cents);
+}
+
+Cents operator-(const Cents &c1, const Cents &c2)
+{
+    return Cents{c1.m_cents - c2.m_cents};
+}
 
 int main()
 {
-    Point2d first;
-    Point2d second(3.0, 4.0);
-    first.print();
-    second.print();
-    std::cout << "Distance between two points: " << distanceFrom(first, second) << '\n';
+
+    Cents c1{3};
+    Cents c2{6};
+
+    Cents sum = c1-c2;
+
+    std::cout << "I have " << sum.getCents() << " cents.";
 
     return 0;
+
 }
