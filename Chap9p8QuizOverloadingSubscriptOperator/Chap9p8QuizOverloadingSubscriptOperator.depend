@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1520940198 source:c:\users\jphr2\documents\github\cpp\chap9p8quizoverloadingsubscriptoperator\main.cpp
+	<iostream>
+	<string>
+	<vector>
+
