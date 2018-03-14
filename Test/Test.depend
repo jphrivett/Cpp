@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1520603342 source:c:\users\jphr2\documents\github\cpp\test\main.cpp
+1521020199 source:c:\users\jphr2\documents\github\cpp\test\main.cpp
 	<iostream>
+	<cassert>
 
 1518516216 c:\users\jphr2\documents\github\cpp\test\testheader1.h
 

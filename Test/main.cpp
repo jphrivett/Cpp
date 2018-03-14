@@ -1,37 +1,74 @@
 #include <iostream>
 #include <cassert>
 
-class Data
+class Matrix
 {
 private:
-    int m_array[5] {1,2,3,4,5};
+    double m_matrix[4][4];
 
 public:
-    Data()
+    Matrix()
     {
-
+        for (int i = 0; i < 4; ++i)
+            for (int j = 0; j < 4; ++j)
+                m_matrix[i][j] = 0.0;
     }
 
-    int& operator[] (const int index)
-    {
-        assert((index >= 0) && (index < 5));
-        return m_array[2];
-    }
+    double& operator()(int row, int col);
+    const double& operator()(int row, int col) const;
+    void operator()();
 
     void print()
     {
-        for (int i:m_array)
-            std::cout << i << " ";
+        for (int i = 0; i < 4; ++i)
+        {
+             for (int j = 0; j < 4; ++j)
+                std::cout << m_matrix[i][j] << ' ';
+
+             std::cout << '\n';
+        }
 
         std::cout << '\n';
+
     }
 
 };
 
+double& Matrix::operator()(int row, int col)
+{
+    assert(row >= 0 && row < 4);
+    assert(col >= 0 && col < 4);
+
+    return m_matrix[row][col];
+
+}
+
+const double& Matrix::operator()(int row, int col) const
+{
+    assert(row >= 0 && row < 4);
+    assert(col >= 0 && col < 4);
+
+    return m_matrix[row][col];
+
+}
+
+void Matrix::operator()()
+{
+    for (int i = 0; i < 4; ++i)
+            for (int j = 0; j < 4; ++j)
+                m_matrix[i][j] = 0.0;
+
+}
+
 int main()
 {
-    Data data;
-    data[2] = 50;
-    data.print();
+    Matrix matrix;
+    matrix(2,3) = 5.3;
+    matrix(1,1) = 3.2;
 
+    matrix.print();
+
+    matrix();
+
+    matrix.print();
 }
