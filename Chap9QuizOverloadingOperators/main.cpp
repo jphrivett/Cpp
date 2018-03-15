@@ -1,5 +1,5 @@
 //Q2:
-#include <iostream>
+/*#include <iostream>
 
 class Average
 {
@@ -52,6 +52,104 @@ int main()
 
 	Average copy = avg;
 	std::cout << copy << '\n';
+
+	return 0;
+}*/
+
+//Q3:
+#include <iostream>
+#include <cassert>
+
+class IntArray
+{
+private:
+    int *m_array = nullptr;
+    int m_size = 0;
+
+public:
+    IntArray(int s = 0) : m_size {s}
+    {
+        assert(m_size > 0);
+
+        m_array = new int[m_size];
+
+        for (int i = 0; i < m_size; ++i)
+            m_array[i] = 0;
+    }
+
+    ~IntArray()
+    {
+        delete[] m_array;
+    }
+
+    IntArray(const IntArray &a)
+    {
+        m_size = a.m_size;
+
+        m_array = new int[m_size];
+
+        for (int i = 0; i < m_size; ++i)
+            m_array[i] = a.m_array[i];
+    }
+
+    int& operator[](const int i) const
+    {
+        assert(i >= 0 && i < m_size);
+
+        return m_array[i];
+    }
+
+    IntArray& operator=(const IntArray &a)
+    {
+        if (this == &a)
+            return *this;
+
+        delete[] m_array;
+
+        m_size = a.m_size;
+
+        m_array = new int[m_size];
+
+        for (int i = 0; i < m_size; ++i)
+            m_array[i] = a.m_array[i];
+
+        return *this;
+    }
+
+    friend std::ostream& operator<<(std::ostream &out, const IntArray &a);
+
+};
+
+std::ostream& operator<<(std::ostream &out, const IntArray &a)
+{
+    for (int i = 0; i < a.m_size; ++i)
+        out << a[i] << ' ';
+
+    return out;
+}
+
+IntArray fillArray()
+{
+	IntArray a(5);
+	a[0] = 5;
+	a[1] = 8;
+	a[2] = 2;
+	a[3] = 3;
+	a[4] = 6;
+
+	return a;
+}
+
+int main()
+{
+	IntArray a = fillArray();
+	std::cout << a << '\n';
+
+	IntArray b(1);
+	a = a;
+	b = a;
+
+	std::cout << b << '\n';
 
 	return 0;
 }
