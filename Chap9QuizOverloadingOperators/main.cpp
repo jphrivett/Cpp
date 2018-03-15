@@ -56,6 +56,7 @@ int main()
 	return 0;
 }*/
 
+/*
 //Q3:
 #include <iostream>
 #include <cassert>
@@ -150,6 +151,139 @@ int main()
 	b = a;
 
 	std::cout << b << '\n';
+	return 0;
+}*/
+
+//Q4:
+#include <iostream>
+#include <cmath>
+#include <cassert>
+
+class FixedPoint2
+{
+private:
+    int16_t m_number = 0;
+    int8_t m_fraction = 0;
+
+public:
+    FixedPoint2(int16_t number = 0, int8_t fraction = 0)
+        : m_number{number}, m_fraction{fraction}
+    {
+        assert((fraction <= 99) && (fraction >= -99));
+
+        if ((m_number < 0) || (m_fraction < 0))
+        {
+            if (m_number > 0)
+                m_number = -m_number;
+
+            if (m_fraction > 0)
+                m_fraction = -m_fraction;
+        }
+    }
+
+    FixedPoint2(double d)
+    {
+        m_number = static_cast<int16_t>(d);
+
+        m_fraction = static_cast<int8_t>(round((d - m_number) * 100));
+
+    }
+
+    operator double() const
+    {
+        return (m_number + (static_cast<double>(m_fraction)/100));
+    }
+
+    FixedPoint2 operator-()
+    {
+        return FixedPoint2(-m_number, -m_fraction);
+    }
+
+    friend bool operator==(const FixedPoint2 &p1, const FixedPoint2 &p2);
+    friend FixedPoint2 operator+(const FixedPoint2 &p1, const FixedPoint2 &p2);
+    friend std::istream& operator>> (std::istream &in, FixedPoint2 &p);
+};
+
+std::ostream& operator<< (std::ostream &out, const FixedPoint2 &p)
+{
+    out << static_cast<double>(p);
+    return out;
+}
+
+std::istream& operator>> (std::istream &in, FixedPoint2 &p)
+{
+    double d;
+    in >> d;
+
+    p = FixedPoint2(d);
+
+    return in;
+}
+
+bool operator==(const FixedPoint2 &p1, const FixedPoint2 &p2)
+{
+    return ((p1.m_number == p2.m_number) && (p1.m_fraction == p2.m_fraction));
+}
+
+FixedPoint2 operator+(const FixedPoint2 &p1, const FixedPoint2 &p2)
+{
+    return FixedPoint2(static_cast<double>(p1) + static_cast<double>(p2));
+}
+
+void testAddition()
+{
+	// h/t to reader Sharjeel Safdar for this function
+	std::cout << std::boolalpha;
+	std::cout << (FixedPoint2(0.75) + FixedPoint2(1.23) == FixedPoint2(1.98)) << '\n'; // both positive, no decimal overflow
+	std::cout << (FixedPoint2(0.75) + FixedPoint2(1.50) == FixedPoint2(2.25)) << '\n'; // both positive, with decimal overflow
+	std::cout << (FixedPoint2(-0.75) + FixedPoint2(-1.23) == FixedPoint2(-1.98)) << '\n'; // both negative, no decimal overflow
+	std::cout << (FixedPoint2(-0.75) + FixedPoint2(-1.50) == FixedPoint2(-2.25)) << '\n'; // both negative, with decimal overflow
+	std::cout << (FixedPoint2(0.75) + FixedPoint2(-1.23) == FixedPoint2(-0.48)) << '\n'; // second negative, no decimal overflow
+	std::cout << (FixedPoint2(0.75) + FixedPoint2(-1.50) == FixedPoint2(-0.75)) << '\n'; // second negative, possible decimal overflow
+	std::cout << (FixedPoint2(-0.75) + FixedPoint2(1.23) == FixedPoint2(0.48)) << '\n'; // first negative, no decimal overflow
+	std::cout << (FixedPoint2(-0.75) + FixedPoint2(1.50) == FixedPoint2(0.75)) << '\n'; // first negative, possible decimal overflow
+}
+
+int main()
+{
+	testAddition();
+
+	FixedPoint2 a(-0.48);
+	std::cout << a << '\n';
+
+	std::cout << -a << '\n';
+
+	std::cout << "Enter a number: "; // enter 5.678
+	std::cin >> a;
+
+	std::cout << "You entered: " << a << '\n';
 
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,8 @@
 # depslib dependency file v1.0
-1521042053 source:c:\users\jphr2\documents\github\cpp\chap9quizoverloadingoperators\main.cpp
+1521125582 source:c:\users\jphr2\documents\github\cpp\chap9quizoverloadingoperators\main.cpp
 	<iostream>
+	<cassert>
+	<iostream>
+	<cmath>
+	<cassert>
 
