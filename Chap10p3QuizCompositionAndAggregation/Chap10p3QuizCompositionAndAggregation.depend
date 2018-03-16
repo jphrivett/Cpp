@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1521211030 source:c:\users\jphr2\documents\github\cpp\chap10p3quizcompositionandaggregation\main.cpp
+	<string>
+	<iostream>
+	<vector>
+	<typeinfo>
+
