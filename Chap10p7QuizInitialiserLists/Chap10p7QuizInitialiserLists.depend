@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1521478994 source:c:\users\jphr2\documents\github\cpp\chap10p7quizinitialiserlists\main.cpp
+	<cassert>
+	<initializer_list>
+	<iostream>
+
