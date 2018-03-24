@@ -78,6 +78,8 @@ int main()
 //Q3:
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <ctime>
 
 class Creature
 {
@@ -139,19 +141,66 @@ public:
 
 };
 
-int main()
+class Monster : public Creature
 {
-    std::cout << "Enter your name: ";
-    std::string name;
-    std::cin >> name;
-    Player p(name);
 
-    std::cout << "Welcome, " << p.getName() << ".\n";
-    std::cout << "You have " << p.getHealth()
-        << " health and are carrying " << p.getGold() << " gold.\n";
+public:
+    enum Type
+    {
+        DRAGON,
+        ORC,
+        SLIME,
+        MAX_TYPES
+    };
 
+    struct MonsterData
+    {
+        std::string name;
+        char symbol;
+        int health;
+        int damage;
+        int gold;
+    };
+
+    static MonsterData monsterData[MAX_TYPES];
+    static Monster getRandomMonster();
+
+    Monster(Type type) : Creature(monsterData[type].name, monsterData[type].symbol, monsterData[type].health, monsterData[type].damage, monsterData[type].gold)
+    {
+
+    }
+};
+
+Monster::MonsterData Monster::monsterData[Monster::MAX_TYPES]
+{
+	{ "dragon", 'D', 20, 4, 100 },
+	{ "orc", 'o', 4, 2, 25 },
+	{ "slime", 's', 1, 1, 10 }
+};
+
+int getRandomNumber(int min, int max)
+{
+    static const double fraction = 1.0/(static_cast<double>(RAND_MAX) + 1.0);
+    return static_cast<int>(rand() * fraction * (max - min + 1) + min);
 }
 
+Monster Monster::getRandomMonster()
+{
+    int type {getRandomNumber(0, MAX_TYPES - 1)};
+    return Monster(static_cast<Type>(type));
+}
+
+int main()
+{
+	srand(static_cast<unsigned int>(time(0))); // set initial seed value to system clock
+	rand(); // get rid of first result
+
+	for (int i = 0; i < 10; ++i)
+	{
+		Monster m = Monster::getRandomMonster();
+		std::cout << "A " << m.getName() << " (" << m.getSymbol() << ") was created.\n";
+	}
+}
 
 
 
