@@ -1,35 +1,37 @@
-#include <string>
-#include <iostream>
-
-class MyString
+class Base
 {
-private:
-	std::string m_string;
 public:
-        // explicit keyword makes this constructor ineligible for implicit conversions
-	explicit MyString(int x) // allocate string of size x
-	{
-		m_string.resize(x);
-	}
-
-	MyString(const char mychar) // allocate string to hold string value
-	{
-		m_string = mychar;
-	}
-
-	friend std::ostream& operator<<(std::ostream& out, const MyString &s);
-
+    int m_public; // can be accessed by anybody
+private:
+    int m_private; // can only be accessed by Base members and friends (but not derived classes)
+protected:
+    int m_protected; // can be accessed by Base members, friends, and derived classes
 };
 
-std::ostream& operator<<(std::ostream& out, const MyString &s)
+class Derived: public Base
 {
-	out << s.m_string;
-	return out;
-}
+public:
+    Derived()
+    {
+        m_public = 1; // allowed: can access public base members from derived class
+        //m_private = 2; // not allowed: can not access private base members from derived class
+        m_protected = 3; // allowed: can access protected base members from derived class
+    }
+};
+
+class Derived2:public Derived
+{
+public:
+    Derived2()
+    {
+        m_protected = 3;
+    }
+};
 
 int main()
 {
-	MyString mine = 'x'; // compile error, since MyString(int) is now explicit and nothing will match this
-	std::cout << mine;
-	return 0;
+    Base base;
+    base.m_public = 1; // allowed: can access public members from outside class
+    //base.m_private = 2; // not allowed: can not access private members from outside class
+    //base.m_protected = 3; // not allowed: can not access protected members from outside class
 }
