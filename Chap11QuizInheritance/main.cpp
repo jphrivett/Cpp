@@ -190,16 +190,108 @@ Monster Monster::getRandomMonster()
     return Monster(static_cast<Type>(type));
 }
 
+void attackMonster(Monster &m, Player &p)
+{
+    m.reduceHealth(p.getDamage());
+    std::cout << "You hit the " << m.getName() << " for " << p.getDamage()
+        << " damage.\n";
+
+    if (m.isDead())
+    {
+        std::cout << "You killed the " << m.getName() << ".\n";
+        p.levelUp();
+        std::cout << "You are now " << p.getLevel() << ".\n";
+        p.addGold(m.getGold());
+        std::cout << "You found " << m.getGold() << " gold.\n";
+
+    }
+}
+
+void attackPlayer(Monster &m, Player &p)
+{
+    p.reduceHealth(m.getDamage());
+    std::cout << "The " << m.getName() << " hit you for " << m.getDamage()
+        << " damage.\n";
+    std::cout << "You have " << p.getHealth() << "/10 health left.\n";
+}
+
+void fightMonster(Player &p)
+{
+    Monster m {Monster::getRandomMonster()};
+
+    std::cout << "You have encountered a " << m.getName() << " "
+        << m.getSymbol() << ".\n";
+
+    while (true)
+    {
+        std::cout << "(R)un or (F)ight: ";
+        std::string option;
+        std::cin >> option;
+
+        if (option == "R")
+        {
+            bool run {static_cast<bool>(getRandomNumber(0,1))};
+
+            if (run)
+            {
+                std::cout << "You successfully fled.\n";
+                break;
+            }
+            else
+            {
+                std::cout << "You failed to flee.\n";
+                attackPlayer(m, p);
+                if (p.isDead())
+                    break;
+            }
+        }
+        else
+        {
+            attackMonster(m, p);
+            if (m.isDead() || p.hasWon())
+                break;
+
+            attackPlayer(m, p);
+            if (p.isDead())
+                break;
+        }
+
+    }
+
+}
+
 int main()
 {
-	srand(static_cast<unsigned int>(time(0))); // set initial seed value to system clock
-	rand(); // get rid of first result
+    srand(static_cast<unsigned int>(time(0)));
+	rand();
 
-	for (int i = 0; i < 10; ++i)
-	{
-		Monster m = Monster::getRandomMonster();
-		std::cout << "A " << m.getName() << " (" << m.getSymbol() << ") was created.\n";
-	}
+    std::cout << "Enter your name: ";
+    std::string name;
+    std::cin >> name;
+    Player p (name);
+
+    std::cout << "Welcome, " << name << "\n";
+
+    while (true)
+    {
+        fightMonster(p);
+
+        if (p.isDead())
+        {
+            std::cout << "You died at level " << p.getLevel()
+                << " and with " << p.getGold() << " gold.\n";
+            std::cout << "Too bad you can't take it with you!\n";
+            break;
+        }
+
+        if (p.hasWon())
+        {
+            std::cout << "You won with " << p.getGold() << " gold!";
+            break;
+        }
+    }
+
+    return 0;
 }
 
 

@@ -1,6 +1,8 @@
 # depslib dependency file v1.0
-1521886758 source:c:\users\jphr2\documents\github\cpp\chap11quizinheritance\main.cpp
+1521926178 source:c:\users\jphr2\documents\github\cpp\chap11quizinheritance\main.cpp
 	<string>
 	<iostream>
 	<string>
+	<cstdlib>
+	<ctime>
 
