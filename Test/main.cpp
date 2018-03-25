@@ -1,37 +1,24 @@
+#include <iostream>
+
 class Base
 {
 public:
-    int m_public; // can be accessed by anybody
-private:
-    int m_private; // can only be accessed by Base members and friends (but not derived classes)
-protected:
-    int m_protected; // can be accessed by Base members, friends, and derived classes
+    virtual const char* getName() { return "Base"; } // note addition of virtual keyword
 };
 
 class Derived: public Base
 {
 public:
-    Derived()
-    {
-        m_public = 1; // allowed: can access public base members from derived class
-        //m_private = 2; // not allowed: can not access private base members from derived class
-        m_protected = 3; // allowed: can access protected base members from derived class
-    }
-};
-
-class Derived2:public Derived
-{
-public:
-    Derived2()
-    {
-        m_protected = 3;
-    }
+    virtual const char* getName() { return "Derived"; }
 };
 
 int main()
 {
+    Derived derived;
     Base base;
-    base.m_public = 1; // allowed: can access public members from outside class
-    //base.m_private = 2; // not allowed: can not access private members from outside class
-    //base.m_protected = 3; // not allowed: can not access protected members from outside class
+    Base &rBase = derived;
+    std::cout << "rBase is a " << rBase.getName() << '\n';
+    std::cout << "base is a " << base.getName() << '\n';
+
+    return 0;
 }
