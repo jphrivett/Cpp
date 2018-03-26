@@ -1,24 +1,45 @@
 #include <iostream>
 
-class Base
+class PoweredDevice
 {
 public:
-    virtual const char* getName() { return "Base"; } // note addition of virtual keyword
+    PoweredDevice(int power)
+    {
+		std::cout << "PoweredDevice: " << power << '\n';
+    }
 };
 
-class Derived: public Base
+class Scanner: virtual public PoweredDevice // note: PoweredDevice is now a virtual base class
 {
 public:
-    virtual const char* getName() { return "Derived"; }
+    Scanner(int scanner, int power)
+        : PoweredDevice(power) // this line is required to create Scanner objects, but ignored in this case
+    {
+		std::cout << "Scanner: " << scanner << '\n';
+    }
+};
+
+class Printer: virtual public PoweredDevice // note: PoweredDevice is now a virtual base class
+{
+public:
+    Printer(int printer, int power)
+        : PoweredDevice(power) // this line is required to create Printer objects, but ignored in this case
+    {
+		std::cout << "Printer: " << printer << '\n';
+    }
+};
+
+class Copier: public Scanner, public Printer
+{
+public:
+    Copier(int scanner, int printer, int power)
+        : Scanner(scanner, power), Printer(printer, power),
+        PoweredDevice(power) // PoweredDevice is constructed here
+    {
+    }
 };
 
 int main()
 {
-    Derived derived;
-    Base base;
-    Base &rBase = derived;
-    std::cout << "rBase is a " << rBase.getName() << '\n';
-    std::cout << "base is a " << base.getName() << '\n';
-
-    return 0;
+    Copier copier(1,2,3);
 }
